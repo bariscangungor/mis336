@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var quote = "The future depends on what you do today. - Mahatma Gandhi";
+}
+
+@model WebApplication.Models.Student
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <h3>@ViewData["Message"]</h3> 
+
+    <br/>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <ul>
+    @for (int i = 0; i < 5; i++) {
+        <li>List item @i</li>
+    }
+</ul>
+    <p>@DateTime.Now</p>
+    <p>@quote</p>
+
+
+
+    @{
+    void RenderName(string name)
+    {
+        <p>Name: <strong>@name</strong></p>
+    }
+
+    RenderName("Gandhi");
+    RenderName("Martin Luther King");
+}
+
+@{
+    var kemal = new Student("Kemal", "MIS");
+}
+
+<p>New Student created, Name: @(kemal.Name)</p>
+
+@{
+    var students = new Student[]
+    {
+          new Student("Şener Şen", "MIS"),
+          new Student("Nevra Serezli", "BIS"),
+    };
+}
+@foreach (var student in students)
+{
+    <p>Name: @student.Name</p>
+    <p>Department: @student.Department</p>
+}
+
+@{
+    var studentsModel = ViewData["Students"];
+}
+@foreach (var student in (IEnumerable<Student>)studentsModel)
+{
+    <p>Name: @student.Name</p>
+    <p>Department: @student.Department</p>
+}
+
+<form>
+  <br>First name:<br>
+    <input type="text" name="firstname">
+  <br>Last name:<br>
+    <input type="text" name="lastname">
+       <br> <button>Register</button>
+    </form>
+
+</div>
